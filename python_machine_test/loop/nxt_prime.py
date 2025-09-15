@@ -1,14 +1,16 @@
-n = int(input("enter a number:"))
+n = int(input("Enter the number:"))
 
 def is_prime(num):
-    if num % 2 == 1:
-        return True
-    else:
-        return False
-
-num = n +1 
+    if num > 1:
+        for i in range(2,num):
+            if num % i == 0:
+                return False
+        else:
+            return True
+        
+number = n + 1
 while True:
-    if is_prime(num):
-        print(f"The first prime greater then {n} is {num}")
+    if is_prime(number):
+        print("the next prime number is",number)
         break
-    num += 1
+    number += 1
