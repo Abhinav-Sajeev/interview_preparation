@@ -6,3 +6,11 @@ def factorial():
     print("Factorial is:", result)
 
 factorial()
+
+
+
+
+# output 
+
+# Enter The number:5
+# Factorial is: 120

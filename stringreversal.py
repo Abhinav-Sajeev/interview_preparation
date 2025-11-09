@@ -9,3 +9,10 @@ rev_string =""
 for ch in string:
     rev_string = ch + rev_string
 print(rev_string)
+
+
+
+# output 
+
+# Enter the string:strong
+# gnorts

@@ -1,0 +1,46 @@
+1. var, let, const
+
+var → old way, can be used anywhere in function (not block-scoped).
+let → used inside blocks { }, can be changed.
+const → also block-scoped but cannot be changed.
+
+2. What is Hoisting?
+
+JavaScript moves variable and function declarations to the top before running the code.
+So, you can use a function before writing it.
+
+3. What is a Closure?
+
+A closure means a function can remember variables from the place where it was created.
+
+4. What is this?
+
+this refers to who is calling the function.
+
+5. Function Declaration vs Expression
+
+Declaration: normal function (hoisted).
+Expression: function stored in a variable (not hoisted).
+
+6. What is Prototypal Inheritance?
+
+Objects can use properties from another object — like a template.
+
+7. Prototype Chain
+
+When JS looks for a property, it checks the object, then its prototype, and keeps going until null.
+Shorter way to write functions.
+They don’t have their own this.
+
+9. Event Bubbling & Capturing
+
+When you click, the event moves:
+Capturing: from top (document) → target.
+
+Bubbling: from target → top.
+You can stop it with event.stopPropagation().
+
+
+10. Event Delegation
+
+Add one event listener to a parent instead of many children — checks event.target.

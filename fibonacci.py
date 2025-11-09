@@ -13,3 +13,17 @@ else:
         a = b
         b = c
         print(c)
+
+
+
+# output 
+
+# Enter the number to obtaine fibonacci series:8
+# 0
+# 1
+# 1
+# 2
+# 3
+# 5
+# 8
+# 13

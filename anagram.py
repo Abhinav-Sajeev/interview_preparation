@@ -8,3 +8,11 @@ if cleaned_string(word1) == cleaned_string(word2):
     print('it is a anagram')
 else:
     print('it is not a anagram')
+
+
+
+# output
+
+# Enter the First Word:listen
+# Enter the Second Word:silent
+# it is a anagram

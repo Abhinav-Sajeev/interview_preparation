@@ -5,3 +5,11 @@ def list_to_dict():
     print(result)
 
 list_to_dict()
+
+
+
+
+
+# output 
+
+# {1: 'one', 2: 'two', 3: 'three'}

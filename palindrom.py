@@ -4,3 +4,9 @@ if string == string[::-1]:
 else:
     print('not a palindrom')
 
+
+
+# output 
+
+# Enter the string:malayalam
+# malayalam is a palindrom

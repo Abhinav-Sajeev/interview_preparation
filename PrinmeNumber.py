@@ -10,3 +10,11 @@ if num > 1:
             break
     else:
         print('number is a prime number')
+
+
+
+
+# output 
+
+# enter the number:11
+# number is a prime number

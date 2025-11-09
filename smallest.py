@@ -66,3 +66,18 @@ for i in number:
         smallest = i
 
 print(f"{smallest} is the smallest in the give input")
+
+
+
+
+
+# output 
+
+# Enter how manay number to u want:5
+# Enter the 1 number:12
+# Enter the 2 number:458
+# Enter the 3 number:452
+# Enter the 4 number:59
+# Enter the 5 number:5
+# [12, 458, 452, 59, 5]
+# 5 is the smallest in the give input

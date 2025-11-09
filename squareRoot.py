@@ -11,3 +11,11 @@ import math
 num = int(input('Enter the number:'))
 sr = math.sqrt(num)
 print('Enter the square rooot of the number:',sr)
+
+
+
+
+# output 
+
+# Enter the number:5
+# Enter the square rooot of the number: 2.23606797749979

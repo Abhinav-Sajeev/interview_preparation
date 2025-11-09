@@ -15,3 +15,6 @@ else:
     print('number is not amstrong')
 
 
+# # output 
+# Enter the input number:153
+# the number is amstrong
