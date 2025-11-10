@@ -14,3 +14,9 @@ while True:
         print("the next prime number is",number)
         break
     number += 1
+
+
+# output 
+
+# Enter the number:58
+# the next prime number is 59

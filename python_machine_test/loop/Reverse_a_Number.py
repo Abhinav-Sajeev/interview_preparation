@@ -7,3 +7,8 @@ while n > 0:
     n //= 10
 
 print(rev)
+
+# output 
+
+# Enter the number to be reverse:1245
+# 5421

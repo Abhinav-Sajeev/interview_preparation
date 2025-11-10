@@ -13,3 +13,9 @@ while product % 10 == 0:
 a = product % 10 
 
 print(a)
+
+
+# output 
+
+# 120
+# 2
