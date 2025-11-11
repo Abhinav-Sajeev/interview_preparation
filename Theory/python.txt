@@ -1,0 +1,122 @@
+1.What are Python’s key features?
+High-level, interpreted, dynamic typing, automatic memory management (GC), built-in data structures, rich standard library, multi-paradigm (procedural, OOP, functional).
+
+2.Difference between list, tuple, set, dict?
+list — ordered, mutable, allows duplicates.
+tuple — ordered, immutable.
+set — unordered, mutable, no duplicates.
+dict — key→value mapping, unordered (insertion-ordered since Py3.7).
+
+3.Mutable vs Immutable — examples?
+Mutable: list, dict, set. Immutable: int, float, str, tuple, frozenset. Mutating a mutable object changes it in-place; immutable objects produce new objects on "change".
+
+4.What’s the difference between == and is?
+== compares values (equality); is checks identity (same object in memory).
+
+5.Explain Python’s memory management / garbage collection.
+Reference counting + generational garbage collector to collect cycles. gc module can manage/inspect GC.
+
+6.What is LEGB rule?
+Scope resolution order: Local → Enclosing (nonlocal) → Global → Built-in.
+
+7.What are list comprehensions — example?
+Concise way to create lists: [x*x for x in range(5) if x%2==0] → [0,4,16].
+
+8.What is a generator?
+Function using yield that produces items lazily, maintaining state between yields. Efficient for large sequences.
+
+def gen(): 
+    for i in range(3): yield i
+
+
+9.Difference between generator and iterator?
+Generator is a type of iterator created with yield or generator expression. Iterator: any object with __iter__() and __next__().
+
+10.x`What does yield do?
+yield returns a value and pauses function state until next __next__() call.
+
+11.What is a decorator?
+A callable that takes a function and returns a new function (often used to wrap behavior).
+
+def deco(f): 
+    def wrapper(*a,**k): return f(*a,**k)
+    return wrapper
+
+
+12.Difference between @staticmethod and @classmethod?
+staticmethod — no implicit first argument. classmethod receives the class (cls) as first arg.
+
+13.What are *args and **kwargs?
+*args captures positional args as tuple; **kwargs captures keyword args as dict.
+
+14.Explain __init__ vs __new__.
+__new__ constructs and returns a new instance (rarely overridden); __init__ initializes the instance after creation.
+
+15.What is method resolution order (MRO)?
+The search order for methods/attributes in multiple inheritance (C3 linearization). Inspect with Class.mro().
+
+16.What is duck typing?
+“If it walks like a duck...” — behavior matters, not explicit type. Rely on presence of methods/attributes.
+
+17.Explain with statement and context managers.
+with uses objects implementing __enter__/__exit__ to ensure setup/teardown (e.g., file handling).
+
+with open('f') as fh: data = fh.read()
+
+
+18.What are __str__ and __repr__?
+__str__ — readable string for users; __repr__ — unambiguous representation (for devs/debugging). repr() fallback is preferred for debugging.
+
+19.Explain property decorator.
+Convert methods into attribute accessors (getter/setter/deleter) without changing interface.
+
+class C:
+    @property
+    def x(self): return self._x
+
+
+20.What are closures?
+Inner functions that capture variables from their enclosing scope. Useful for factory functions.
+
+def outer(a):
+    def inner(): return a
+    return inner
+
+21.Explain lambda functions and limitations.
+Anonymous one-expression functions: lambda x: x+1. Limited to single expressions, less readable for complex logic.
+
+22.What is map(), filter(), reduce()?
+Functional tools: map applies a function to each item, filter selects items by predicate, reduce folds a sequence (from functools).
+
+23.Differences: shallow copy vs deep copy?
+Shallow (copy.copy) copies object but references same nested objects. Deep (copy.deepcopy)
+
+24.Explain exception handling (try/except/finally/else).
+try block code; except handles exceptions; else runs if no exception; finally runs always for cleanup.
+
+25.How to create custom exceptions?
+Subclass Exception (or a more specific built-in) and raise it:
+
+class MyError(Exception): pass
+raise MyError("msg")
+
+26.Explain Python’s GIL (Global Interpreter Lock).
+GIL ensures only one native thread executes Python bytecode at a time in CPython — limits CPU-bound threading parallelism. Use multiprocessing for CPU parallelism.
+
+27.Difference between threading and multiprocessing?
+threading — lightweight threads share memory (useful for I/O-bound). multiprocessing — separate processes with separate memory, true parallelism for CPU-bound tasks.
+
+28.What is asyncio / async / await?
+Concurrency framework for cooperative multitasking (coroutines). async def defines coroutine; await pauses until awaitable completes.
+
+29.When to use threads vs async?
+Use threads for blocking I/O libraries that don’t support async; use asyncio for many concurrent I/O operations with async-aware libraries.
+
+28.What is zip() and enumerate()?
+zip() aggregates elements from iterables into tuples. enumerate() yields pairs (index, value).
+
+30.What is __dict__?
+Attribute dictionary for an object (unless __slots__ used) storing instance attributes.
+
+31.What is __init__.py for?
+Marks a directory as a Python package (pre-Py3.3 it was required; now optional but still used to control package initialization).

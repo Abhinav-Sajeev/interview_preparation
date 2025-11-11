@@ -1,0 +1,358 @@
+
+
+### **1. What is Django?**
+
+**Answer:**
+Django is a **high-level Python web framework** that allows rapid development of secure and maintainable websites.
+It follows the **MVT (Model–View–Template)** architecture.
+
+---
+
+### **2. Explain the MVT architecture in Django.**
+
+| Component    | Description                                   |
+| ------------ | --------------------------------------------- |
+| **Model**    | Defines data structure (tables in database)   |
+| **View**     | Handles business logic and processes requests |
+| **Template** | Handles user interface (HTML files)           |
+
+Example flow:
+
+```
+User Request → View → Model (DB) → View → Template → Response
+```
+
+---
+
+### **3. What are Django models?**
+
+**Answer:**
+Models are Python classes that define the structure of database tables using Django’s ORM.
+
+**Example:**
+
+```python
+from django.db import models
+
+class Employee(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+```
+
+---
+
+### **4. What is ORM in Django?**
+
+**Answer:**
+ORM (**Object-Relational Mapper**) lets developers interact with the database using **Python objects** instead of raw SQL.
+
+Example:
+
+```python
+Employee.objects.filter(age__gt=25)
+```
+
+This generates an SQL query behind the scenes.
+
+---
+
+### **5. What are Django views?**
+
+**Answer:**
+A view is a Python function or class that receives an HTTP request and returns an HTTP response.
+
+**Example (Function-based view):**
+
+```python
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Hello, Django!")
+```
+
+---
+
+### **6. What are Django templates?**
+
+**Answer:**
+Templates are HTML files that display data dynamically using template tags and variables.
+
+**Example:**
+
+```html
+<h1>Hello, {{ user.username }}!</h1>
+```
+
+---
+
+### **7. What is a URLconf (URL configuration) in Django?**
+
+**Answer:**
+It maps URLs to views using the `urls.py` file.
+
+**Example:**
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('home/', views.home, name='home')
+]
+```
+
+---
+
+### **8. How do you connect Django with a database?**
+
+**Answer:**
+Database settings are defined in `settings.py`.
+
+**Example (for SQLite):**
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+```
+
+---
+
+### **9. What is `manage.py`?**
+
+**Answer:**
+A command-line utility to interact with Django projects.
+Used for tasks like running the server, migrations, and creating apps.
+
+**Examples:**
+
+```bash
+python manage.py runserver
+python manage.py makemigrations
+python manage.py migrate
+```
+
+---
+
+### **10. What are migrations in Django?**
+
+**Answer:**
+Migrations are Django’s way of applying changes made to models (Python code) into the actual database schema.
+
+**Commands:**
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+---
+
+### **11. What are static files in Django?**
+
+**Answer:**
+Static files are files like **CSS, JS, and images** that don’t change often.
+
+**Example configuration:**
+
+```python
+STATIC_URL = '/static/'
+```
+
+In templates:
+
+```html
+{% load static %}
+<img src="{% static 'images/logo.png' %}">
+```
+
+---
+
+### **12. What are media files in Django?**
+
+**Answer:**
+Media files are **user-uploaded files** (like profile pictures).
+
+**Configuration:**
+
+```python
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+```
+
+---
+
+### **13. What are Django forms?**
+
+**Answer:**
+Django forms handle **HTML form creation**, **validation**, and **data saving**.
+
+**Example:**
+
+```python
+from django import forms
+from .models import Employee
+
+class EmployeeForm(forms.ModelForm):
+    class Meta:
+        model = Employee
+        fields = ['name', 'age']
+```
+
+---
+
+### **14. Difference between `Form` and `ModelForm`.**
+
+| Form                       | ModelForm                        |
+| -------------------------- | -------------------------------- |
+| Created manually           | Automatically created from model |
+| No direct link to database | Linked to database model         |
+| Used for custom forms      | Used for CRUD operations         |
+
+---
+
+### **15. What is the Django admin interface?**
+
+**Answer:**
+A built-in feature to manage models and database data via a browser.
+
+To enable:
+
+```python
+# admin.py
+from django.contrib import admin
+from .models import Employee
+
+admin.site.register(Employee)
+```
+
+Then run:
+
+```
+python manage.py createsuperuser
+```
+
+---
+
+### **16. What is middleware in Django?**
+
+**Answer:**
+Middleware are hooks that process requests and responses globally.
+
+**Examples:**
+AuthenticationMiddleware, SessionMiddleware, CSRF protection.
+
+**Custom Middleware Example:**
+
+```python
+class SimpleMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        print("Before view")
+        response = self.get_response(request)
+        print("After view")
+        return response
+```
+
+---
+
+### **17. How do you handle sessions in Django?**
+
+**Answer:**
+Django provides built-in session management using cookies or the database.
+
+**Example:**
+
+```python
+def set_session(request):
+    request.session['user'] = 'Abhinav'
+    return HttpResponse("Session Set")
+
+def get_session(request):
+    user = request.session.get('user')
+    return HttpResponse(user)
+```
+
+---
+
+### **18. How do you handle authentication and authorization in Django?**
+
+**Answer:**
+Django has a built-in authentication system for users, groups, and permissions.
+
+**Example:**
+
+```python
+from django.contrib.auth.models import User
+
+# create user
+user = User.objects.create_user(username='john', password='pass123')
+
+# login view
+from django.contrib.auth import authenticate, login
+user = authenticate(username='john', password='pass123')
+if user:
+    login(request, user)
+```
+
+---
+
+### **19. What are signals in Django?**
+
+**Answer:**
+Signals allow components to communicate when certain events occur (e.g., after saving a model).
+
+**Example:**
+
+```python
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from .models import Employee
+
+@receiver(post_save, sender=Employee)
+def after_save(sender, instance, **kwargs):
+    print("Employee saved:", instance.name)
+```
+
+---
+
+### **20. What is the difference between Function-Based Views (FBV) and Class-Based Views (CBV)?**
+
+| Feature     | Function-Based View                | Class-Based View              |
+| ----------- | ---------------------------------- | ----------------------------- |
+| Definition  | Written as simple Python functions | Written as Python classes     |
+| Simplicity  | Easier for small apps              | Better for complex views      |
+| Reusability | Hard to reuse                      | Highly reusable (with mixins) |
+
+**Example (CBV):**
+
+```python
+from django.views import View
+from django.http import HttpResponse
+
+class HomeView(View):
+    def get(self, request):
+        return HttpResponse("Welcome to CBV!")
+```
+
+---
+
+✅ **Bonus Quick Questions:**
+
+1. What is `settings.py`? → Main configuration file for the Django project.
+2. What is `wsgi.py`? → Gateway interface for deploying Django apps on web servers.
+3. What is the difference between `get()` and `filter()`?
+
+   * `get()` returns a single object (raises error if not found)
+   * `filter()` returns a queryset (empty if not found).
+4. What is `QuerySet`? → A collection of database queries returned by ORM.
+5. What is CSRF protection? → Security feature to prevent cross-site request forgery attacks.
+
+---
+
+
